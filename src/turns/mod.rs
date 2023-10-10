@@ -48,7 +48,7 @@ mod fill_game_board_coordinates_based_on_turn {
     use super::*;
 
     #[test]
-    fn fill_game_board_coordinates_based_on_turn_given_invalid_coordinates () {
+    fn given_invalid_coordinates_should_return_error () {
         let mut game_board: [[char; 3]; 3] = [[EMPTY_CELL_CHARACTER; 3]; 3];
         let starting_turn: i32 = 1;
         let coordinates: (i32, i32) = (-1, 12);
@@ -64,7 +64,7 @@ mod fill_game_board_coordinates_based_on_turn {
     }
 
     #[test]
-    fn fill_game_board_coordinates_based_on_turn_given_already_occupied_coordinates() {
+    fn given_coordinates_for_already_occupied_cell_should_return_error() {
         let mut game_board: [[char; 3]; 3] = [[EMPTY_CELL_CHARACTER; 3]; 3];
         game_board[0][0] = 'A';
         let starting_turn: i32 = 1;
@@ -81,7 +81,7 @@ mod fill_game_board_coordinates_based_on_turn {
     }
 
     #[test]
-    fn fill_game_board_coordinates_based_on_turn_when_valid_coordinates_and_even_turn() {
+    fn given_valid_coordinates_and_even_turn_should_place_even_character_into_cell() {
         let mut game_board: [[char; 3]; 3] = [[EMPTY_CELL_CHARACTER; 3]; 3];
         let turn: i32 = 2;
         let coordinates: (i32, i32) = (0, 0);
@@ -99,7 +99,7 @@ mod fill_game_board_coordinates_based_on_turn {
     }
 
     #[test]
-    fn fill_game_board_coordinates_based_on_turn_when_valid_coordinates_and_odd_turn() {
+    fn given_valid_coordinates_and_even_turn_should_place_odd_character_into_cell() {
         let mut game_board: [[char; 3]; 3] = [[EMPTY_CELL_CHARACTER; 3]; 3];
         let turn: i32 = 1;
         let coordinates: (i32, i32) = (0, 0);
@@ -121,7 +121,7 @@ mod fill_game_board_coordinates_based_on_turn {
 mod define_next_turn {
     use super::*;
     #[test]
-    fn define_next_turn_for_starting_turn() {
+    fn given_starting_turn_should_only_increment_turn() {
         let mut current_turn: i32 = 1;
         let mut game_has_finished: bool = false;
 
@@ -132,7 +132,7 @@ mod define_next_turn {
     }
 
     #[test]
-    fn define_next_turn_when_game_should_finish() {
+    fn given_max_turn_number_should_mark_game_as_finished() {
         let mut current_turn: i32 = 9;
         let mut game_has_finished: bool = false;
 
@@ -143,7 +143,7 @@ mod define_next_turn {
     }
 
     #[test]
-    fn define_next_turn_when_turn_is_out_of_range_lower_limit() {
+    fn given_invalid_lower_limit_should_return_error() {
         let mut current_turn: i32 = 0;
         let mut game_has_finished: bool = false;
 
@@ -157,7 +157,7 @@ mod define_next_turn {
     }
 
     #[test]
-    fn define_next_turn_when_turn_is_out_of_range_higher_limit() {
+    fn given_invalid_higher_limit_should_return_error() {
         let mut current_turn: i32 = 10;
         let mut game_has_finished: bool = false;
 
