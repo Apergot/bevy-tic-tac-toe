@@ -15,18 +15,18 @@ pub fn define_next_turn(
     current_turn: &mut i32, 
     game_has_finished: &mut bool
 ) -> Result<(), &'static str> {
+    match *current_turn {
+        1..=MAX_NUMBER_OF_TURNS => {
+            if *current_turn == MAX_NUMBER_OF_TURNS {
+                *game_has_finished = true;
+                return Ok(());
+            }
 
-    if *current_turn <= 0 || *current_turn > MAX_NUMBER_OF_TURNS {
-        return Err(OUT_OF_RANGE_ERROR_MESSAGE)
+            *current_turn += 1;
+            Ok(())
+        },
+        _ => Err(OUT_OF_RANGE_ERROR_MESSAGE)
     }
-
-    if *current_turn == MAX_NUMBER_OF_TURNS {
-        *game_has_finished = true;
-    } else {
-        *current_turn += 1;
-    }
-
-    Ok(())
 }
 
 #[cfg(test)]
