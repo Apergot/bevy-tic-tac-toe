@@ -1,10 +1,6 @@
 use crate::constants::*;
 mod errors;
 
-const MAX_NUMBER_OF_TURNS: i32 = 9;
-const ODD_TURN_CHARACTER: char = 'X';
-const EVEN_TURN_CHARACTER: char = 'O';
-
 pub fn fill_game_board_coordinates_based_on_turn(
     current_turn: i32, 
     game_board: &mut [[char; 3]; 3],
@@ -46,7 +42,6 @@ pub fn define_next_turn(
 
 mod fill_game_board_coordinates_based_on_turn {
     use super::*;
-
     #[test]
     fn given_invalid_coordinates_should_return_error () {
         let mut game_board: [[char; 3]; 3] = [[EMPTY_CELL_CHARACTER; 3]; 3];
