@@ -1,0 +1,1 @@
+pub const EMPTY_CELL_CHARACTER: char = '_';
