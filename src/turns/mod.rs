@@ -1,14 +1,15 @@
+mod errors;
+
 const MAX_NUMBER_OF_TURNS: i32 = 9;
-const ODD_PLAYER_CHARACTER: char = 'X';
-const EVEN_PLAYER_CHARACTER: char = 'O';
-const OUT_OF_RANGE_ERROR_MESSAGE: &'static str = "Turn out of range";
+const ODD_TURN_CHARACTER: char = 'X';
+const EVEN_TURN_CHARACTER: char = 'O';
 
-fn current_turn_is_odd(turn: i32) -> bool {
-    turn%2 != 0
-}
-
-fn current_turn_is_even(turn: i32) -> bool {
-    turn%2 == 0
+pub fn fill_game_board_coordinates_based_on_turn(
+    current_turn: i32, 
+    game_board: &mut [[i32; 3]; 3],
+    coordinates: (i32, i32)
+) -> Result<(), &'static str>{
+    Ok(())
 }
 
 pub fn define_next_turn(
@@ -25,13 +26,29 @@ pub fn define_next_turn(
             *current_turn += 1;
             Ok(())
         },
-        _ => Err(OUT_OF_RANGE_ERROR_MESSAGE)
+        _ => Err(errors::OUT_OF_RANGE_ERROR_MESSAGE)
     }
 }
 
 #[cfg(test)]
 mod turns {
     use super::*;
+
+    #[test]
+    fn fill_game_board_coordinates_based_on_turn_given_invalid_coordinates () {
+        let mut game_board: [[i32; 3]; 3] = [[0; 3]; 3];
+        let starting_turn: i32 = 1;
+        let coordinates: (i32, i32) = (-1, 12);
+
+        assert_eq!(
+            fill_game_board_coordinates_based_on_turn(
+                starting_turn, 
+                &mut game_board, 
+                coordinates
+            ),
+            Err(errors::INVALID_COORDINATES_PROVIDED)
+        )
+    }
 
     #[test]
     fn define_next_turn_for_starting_turn() {
@@ -62,7 +79,7 @@ mod turns {
 
         assert_eq!(
             define_next_turn(&mut current_turn, &mut game_has_finished), 
-            Err(OUT_OF_RANGE_ERROR_MESSAGE)
+            Err(errors::OUT_OF_RANGE_ERROR_MESSAGE)
         );
 
         assert_eq!(current_turn, 0);
@@ -76,7 +93,7 @@ mod turns {
 
         assert_eq!(
             define_next_turn(&mut current_turn, &mut game_has_finished),
-            Err(OUT_OF_RANGE_ERROR_MESSAGE)
+            Err(errors::OUT_OF_RANGE_ERROR_MESSAGE)
         );
 
         assert_eq!(current_turn, 10);

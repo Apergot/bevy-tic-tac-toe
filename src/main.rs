@@ -1,13 +1,17 @@
 mod turns;
 
-use bevy::prelude::*;
-
 fn main() {
-    App::new()
-        .add_systems(Update, hello_world)
-        .run();
-}
+    let mut starting_turn: i32 = 1;
+    let mut game_has_finished: bool = false;
+    let mut game_board: [[i32; 3]; 3] = [[0; 3]; 3];
 
-fn hello_world() {
-    println!("Hello World");
+
+    match turns::define_next_turn(&mut starting_turn, &mut game_has_finished) {
+        Ok(()) => {
+            println!("Turn incremented successfully")
+        },
+        Err(err_msg) => {
+            println!("Error: {}", err_msg)
+        }
+    }
 }
